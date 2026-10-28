@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LQYDTV1NV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3LQYDTV1NV');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "pxyz123456");
+</script>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Кошик замовлень — Fernwick Україна</title>
+<meta name="description" content="Сторінка кошика замовлень інтернет-магазину Fernwick. Оформлення замовлення рослин з доставкою по Україні." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/shop.css" />
+</head>
+<body>
+
+<div class="announce">
+  <p>Безкоштовна доставка замовлень від 1 500 грн по Україні — <a href="shop.html">перейти до каталогу</a></p>
+</div>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="brand" href="index.html" aria-label="Fernwick — на головну">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21V9" />
+        <path d="M12 13c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z" />
+        <path d="M12 16c0-2.8-2.2-5-5-5 0 2.8 2.2 5 5 5Z" />
+      </svg>
+      <span class="brand__word">Fernwick</span>
+    </a>
+
+    <nav class="shopnav" aria-label="Main" data-open="false">
+      <a href="shop.html">Каталог</a>
+      <a href="care.html">Гід по догляду</a>
+      <a href="about.html">Про оранжерею</a>
+      <a href="cart.html">Кошик</a>
+    </nav>
+      <a href="care.html">Care guides</a>
+      <a href="about.html">Our nursery</a>
+      <a href="cart.html" aria-current="page">Basket</a>
+    </nav>
+
+    <div class="masthead__tools">
+      <label class="searchbox">
+        <span class="sr-only">Search plants</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="input" type="search" placeholder="Search plants…" />
+      </label>
+
+      <button class="btn btn--icon" type="button" data-toast="Accounts are a demo in this template" aria-label="Your account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+      </button>
+
+      <button class="btn btn--icon" type="button" data-action="open-drawer" aria-label="Open basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span class="cartbtn__count" data-cart-count hidden>0</span>
+      </button>
+
+      <button class="btn btn--icon burger" type="button" aria-expanded="false" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap section--tight">
+  <nav class="label" aria-label="Breadcrumb" style="margin-bottom:var(--s-4)">
+    <a href="index.html">Home</a> / <span>Basket</span>
+  </nav>
+
+  <div class="sechead"><div><h1>Your basket</h1></div></div>
+
+  <div data-cart-empty>
+    <div class="empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <h2>Nothing in the basket yet</h2>
+      <p>Add a plant and it will appear here. Your basket is kept in this browser, so it survives a refresh.</p>
+      <a class="btn btn--primary" href="shop.html">Shop the nursery</a>
+    </div>
+  </div>
+
+  <div data-cart-filled hidden>
+    <div class="grid" style="grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:var(--s-6);align-items:start">
+      <div>
+        <div data-cart-lines="page" style="display:grid;gap:var(--s-5)"></div>
+        <div style="margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--hairline)">
+          <a class="tlink" href="shop.html">← Continue shopping</a>
+        </div>
+      </div>
+
+      <aside style="background:var(--paper);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:var(--s-5);display:grid;gap:var(--s-3);position:sticky;top:90px">
+        <h2 style="font-size:var(--text-md)">Order summary</h2>
+        <div class="totalrow"><span>Subtotal</span><span class="num" data-cart-subtotal>£0</span></div>
+        <div class="totalrow"><span>Delivery</span><span class="num" data-cart-delivery>Free</span></div>
+        <p class="label">Free over £40 — dispatched Tuesday to Friday</p>
+        <div class="totalrow totalrow--grand"><span>Total</span><span class="num" data-cart-total>£0</span></div>
+
+        <form class="newsletter" style="margin-top:var(--s-2)" data-demo-form="Promo codes are a demo in this template">
+          <label class="sr-only" for="promo">Promo code</label>
+          <input class="input" id="promo" type="text" placeholder="Promo code" />
+          <button class="btn btn--ghost" type="submit">Apply</button>
+        </form>
+
+        <button class="btn btn--primary btn--block" type="button" data-toast="Checkout is where you wire in your own payment provider">
+          Checkout securely
+        </button>
+        <p class="label" style="text-align:center">This template ships without a payment backend</p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="brand" href="index.html" style="margin-bottom:var(--s-3)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 21V9" /><path d="M12 13c0-3.3 2.7-6 6-6 0 3.3-2.7 6-6 6Z" /><path d="M12 16c0-2.8-2.2-5-5-5 0 2.8 2.2 5 5 5Z" />
+          </svg>
+          <span class="brand__word">Fernwick</span>
+        </a>
+        <p class="muted" style="font-size:var(--text-sm);max-width:34ch;margin-bottom:var(--s-4)">
+          A small nursery in the Lea Valley. We grow what we sell, and we tell you honestly
+          how hard it is to keep alive.
+        </p>
+        <form class="newsletter" data-demo-form="Thanks — check your inbox for a welcome note">
+          <label class="sr-only" for="nl">Email address</label>
+          <input class="input" id="nl" type="email" placeholder="Email address" required />
+          <button class="btn btn--primary" type="submit">Join</button>
+        </form>
+      </div>
+
+      <div>
+        <h3>Shop</h3>
+        <ul>
+          <li><a href="shop.html">All plants</a></li>
+          <li><a href="shop.html">Easy care</a></li>
+          <li><a href="shop.html">Pet safe</a></li>
+          <li><a href="shop.html">Low light</a></li>
+          <li><a href="shop.html">Sale</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Каталог</h3>
+        <ul>
+          <li><a href="shop.html">Всі рослини</a></li>
+          <li><a href="shop.html">Невибагливі види</a></li>
+          <li><a href="shop.html">Безпечні для котів</a></li>
+          <li><a href="shop.html">Для тіньових кімнат</a></li>
+          <li><a href="shop.html">Акційні пропозиції</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Клієнтам</h3>
+        <ul>
+          <li><a href="care.html">Гіди з догляду</a></li>
+          <li><a href="care.html">Поради щодо поливу</a></li>
+          <li><a href="about.html">Доставка та повернення</a></li>
+          <li><a href="about.html">Гарантія 30 днів</a></li>
+          <li><a href="about.html">Контакти та шоурум</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Про компанію</h3>
+        <ul>
+          <li><a href="about.html">Наша історія</a></li>
+          <li><a href="about.html">Шоурум в Одесі</a></li>
+          <li><a href="about.html">Оптовим клієнтам</a></li>
+          <li><a href="about.html">Екологічні ініціативи</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Обов'язкове навчальне повідомлення за вимогами завдання -->
+    <div class="educational-notice">
+      <div class="educational-notice__title">⚠️ ПОВІДОМЛЕННЯ ПРО НАВЧАЛЬНИЙ ХАРАКТЕР ВЕБ-САЙТУ</div>
+      <p class="educational-notice__text">
+        <strong>Увага!</strong> Цей веб-сайт є навчальним проектом, створеним виключно з освітньою метою в межах навчального курсу. Сайт не здійснює комерційної діяльності, не надає платних послуг і не призначений для отримання прибутку.
+      </p>
+    </div>
+
+    <div class="foot__bottom">
+      <p class="label">© 2026 Fernwick Україна — Навчальний проект для ОНЕУ</p>
+      <p class="label">Шаблон від <a href="https://html.design/" target="_blank" rel="noopener noreferrer" class="tlink">html.design</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== Cart drawer ===================== -->
+<div class="scrim" id="drawerScrim" data-open="false" aria-hidden="true"></div>
+<aside class="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Your basket">
+  <div class="drawer__head">
+    <h2 style="font-size:var(--text-md)">Your basket</h2>
+    <button class="btn btn--icon" type="button" data-action="close-drawer" aria-label="Close basket">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer__body">
+    <div data-cart-empty>
+      <div class="empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <h3>Your basket is empty</h3>
+        <p>Nothing potted up yet. Have a look through the nursery.</p>
+        <a class="btn btn--primary btn--sm" href="shop.html">Shop plants</a>
+      </div>
+    </div>
+    <div data-cart-lines="drawer" style="display:grid;gap:var(--s-5)"></div>
+  </div>
+
+  <div class="drawer__foot" data-cart-filled hidden>
+    <div class="totalrow"><span>Subtotal</span><span class="num" data-cart-subtotal>£0</span></div>
+    <div class="totalrow"><span>Delivery</span><span class="num" data-cart-delivery>Free</span></div>
+    <div class="totalrow totalrow--grand"><span>Total</span><span class="num" data-cart-total>£0</span></div>
+    <a class="btn btn--primary btn--block" href="cart.html">View basket</a>
+    <button class="btn btn--ghost btn--block" type="button" data-toast="Checkout is where you wire in your own payment provider">Checkout</button>
+  </div>
+</aside>
+
+<div class="toasts" aria-live="polite"></div>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
