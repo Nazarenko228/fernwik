@@ -49,6 +49,7 @@
 
     writeCart(items);
     toast(item.name + ' додано до кошика');
+    track('add_to_cart', { currency: 'UAH', value: item.price * item.qty / 100, items: [gaItem(item)] });
   }
 
   function setQty(index, qty) {
@@ -71,8 +72,8 @@
     var items = readCart();
     var count = items.reduce(function (n, i) { return n + i.qty; }, 0);
     var sub = subtotal(items);
-    // Free delivery over £40 — the same threshold the announcement bar states.
-    var delivery = items.length === 0 || sub >= 4000 ? 0 : 495;
+    // Безкоштовна доставка від 1 500 грн (ціни в копійках), інакше 120 грн.
+    var delivery = items.length === 0 || sub >= 150000 ? 0 : 12000;
 
     $$('[data-cart-count]').forEach(function (node) {
       node.textContent = count;
@@ -121,9 +122,9 @@
     stepper.style.transform = 'scale(0.86)';
     stepper.style.transformOrigin = 'left center';
     stepper.innerHTML =
-      '<button type="button" aria-label="Decrease quantity">' + minusIcon() + '</button>' +
-      '<input type="number" min="0" value="' + item.qty + '" aria-label="Quantity for ' + item.name + '" />' +
-      '<button type="button" aria-label="Increase quantity">' + plusIcon() + '</button>';
+      '<button type="button" aria-label="Зменшити кількість">' + minusIcon() + '</button>' +
+      '<input type="number" min="0" value="' + item.qty + '" aria-label="Кількість: ' + item.name + '" />' +
+      '<button type="button" aria-label="Збільшити кількість">' + plusIcon() + '</button>';
 
     var buttons = $$('button', stepper);
     var input = $('input', stepper);
@@ -343,7 +344,7 @@
         e.preventDefault();
         var on = btn.getAttribute('aria-pressed') === 'true';
         btn.setAttribute('aria-pressed', String(!on));
-        toast(on ? 'Removed from wishlist' : 'Saved to wishlist');
+        toast(on ? 'Видалено зі списку бажань' : 'Додано до списку бажань');
       });
     });
 
@@ -403,6 +404,107 @@
     targets.forEach(function (t) { io.observe(t); });
   }
 
+
+  /* ------------------------------------------------------------------------
+     Google Analytics 4 — воронка продажів
+     view_item_list -> view_item -> add_to_cart -> view_cart -> begin_checkout -> generate_lead
+     ------------------------------------------------------------------------ */
+
+  function track(name, params, done) {
+    var called = false;
+    function next() { if (!called) { called = true; if (done) done(); } }
+    if (typeof window.gtag === 'function') {
+      params = params || {};
+      params.event_callback = next;
+      params.transport_type = 'beacon';
+      window.gtag('event', name, params);
+      setTimeout(next, 700);
+    } else { next(); }
+  }
+
+  function gaItem(i) {
+    return { item_id: i.id, item_name: i.name, item_variant: i.variant || '', price: i.price / 100, quantity: i.qty || 1 };
+  }
+
+  function cardItem(card, index) {
+    var btn = $('[data-add]', card);
+    var name = card.dataset.name || (btn && btn.dataset.name) || '';
+    return { item_id: btn ? btn.dataset.add : name, item_name: name, price: parseInt(card.dataset.price, 10) / 100, index: index, quantity: 1 };
+  }
+
+  function initFunnel() {
+    var page = (location.pathname.split('/').pop() || 'index.html');
+    var cards = $$('article.product[data-product]');
+
+    // 1. перегляд списку товарів (головна, каталог)
+    if (cards.length && page !== 'product.html') {
+      track('view_item_list', {
+        item_list_name: page === 'shop.html' ? 'Каталог рослин' : 'Головна сторінка',
+        items: cards.map(cardItem)
+      });
+    }
+    // перехід із картки списку на сторінку товару
+    cards.forEach(function (card, i) {
+      $$('a[href="product.html"]', card).forEach(function (a) {
+        a.addEventListener('click', function () {
+          track('select_item', { item_list_name: page, items: [cardItem(card, i)] });
+        });
+      });
+    });
+
+    // 2. перегляд картки товару
+    if (page === 'product.html') {
+      var b = $('.pdp [data-add]');
+      if (b) track('view_item', { currency: 'UAH', value: parseInt(b.dataset.price, 10) / 100,
+        items: [{ item_id: b.dataset.add, item_name: b.dataset.name, price: parseInt(b.dataset.price, 10) / 100, quantity: 1 }] });
+    }
+
+    // 3. перегляд кошика
+    var cart = readCart();
+    if (page === 'cart.html' && cart.length) {
+      track('view_cart', { currency: 'UAH', value: subtotal(cart) / 100, items: cart.map(gaItem) });
+    }
+
+    // 4. початок оформлення
+    var orderForm = $('[data-order-form]');
+    function beginCheckout() {
+      var c = readCart();
+      track('begin_checkout', { currency: 'UAH', value: subtotal(c) / 100, items: c.map(gaItem) });
+    }
+    $$('[data-checkout]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        beginCheckout();
+        if (orderForm) { orderForm.hidden = false; var f = $('input', orderForm); if (f) f.focus(); }
+      });
+    });
+    if (orderForm && location.hash === '#order' && cart.length) {
+      orderForm.hidden = false;
+      beginCheckout();
+    }
+
+    // 5. заявка на замовлення (лід)
+    if (orderForm) orderForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var c = readCart();
+      track('generate_lead', { currency: 'UAH', value: subtotal(c) / 100, lead_source: 'order_form', items: c.map(gaItem) });
+      toast('Дякуємо! Це навчальний сайт — замовлення не обробляється.');
+      orderForm.reset();
+      orderForm.hidden = true;
+    });
+    // звернення до агронома (сторінка «Про оранжерею»)
+    $$('form[data-lead-form]').forEach(function (form) {
+      form.addEventListener('submit', function () {
+        track('generate_lead', { currency: 'UAH', value: 0, lead_source: 'contact_form' });
+      });
+    });
+    // підписка на розсилку
+    $$('form.newsletter').forEach(function (form) {
+      if (form.querySelector('[type=email]')) form.addEventListener('submit', function () {
+        track('sign_up', { method: 'newsletter' });
+      });
+    });
+  }
+
   /* ---------------------------------------------------------------------- */
   document.addEventListener('DOMContentLoaded', function () {
     initDrawer();
@@ -412,6 +514,7 @@
     initMisc();
     initReveal();
     render();
+    initFunnel();
   });
 
   window.Fernwick = { toast: toast, addItem: addItem, readCart: readCart };
