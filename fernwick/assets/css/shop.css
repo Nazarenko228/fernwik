@@ -748,3 +748,12 @@
   margin: 40px 0;
 }
 
+
+
+/* ===== Доопрацювання: Назаренко Кіра, 36/1 ===== */
+.educational-notice__text { font-style: italic; letter-spacing: 0.01em; }
+.educational-notice__more { margin-top: 8px; font-size: 0.8rem; opacity: 0.75; }
+.orderform { display: grid; gap: var(--s-3); margin-top: var(--s-3); padding: var(--s-4); border: 1px dashed var(--ochre); border-radius: var(--r-md, 10px); background: color-mix(in srgb, var(--ochre) 6%, transparent); }
+.orderform h3 { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.06em; }
+.product__media img { transition: transform 0.4s ease, filter 0.4s ease; }
+.product:hover .product__media img { transform: scale(1.04); filter: saturate(1.15); }
