@@ -757,3 +757,8 @@
 .orderform h3 { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.06em; }
 .product__media img { transition: transform 0.4s ease, filter 0.4s ease; }
 .product:hover .product__media img { transform: scale(1.04); filter: saturate(1.15); }
+/* мобільне меню: у закритому стані повністю ховаємо (у шаблоні край меню виглядав над шапкою) */
+@media (max-width: 780px) {
+  .shopnav { transform: translateY(calc(-100% - 80px)); visibility: hidden; transition: transform var(--dur) var(--ease), visibility 0s linear var(--dur); }
+  .shopnav[data-open="true"] { visibility: visible; transition: transform var(--dur) var(--ease); }
+}
